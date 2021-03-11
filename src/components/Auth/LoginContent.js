@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Roboto",
     lineHeight: 1.5,
     marginTop: "0.5rem",
+    cursor: "pointer",
   },
 }));
 
@@ -94,7 +95,11 @@ const LoginContent = () => {
           </Typography>
         </Box>
         <Box>
-          <Typography variant="body2" className={classes.bottomText}>
+          <Typography
+            variant="body2"
+            className={classes.bottomText}
+            onClick={() => window.location.assign("/register-user")}
+          >
             No account? Get one now
           </Typography>
         </Box>

@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Header from "../../components/Common/Header";
 
 const RegisterPage = () => {
-    return (
-        <div>
-            Register Page
-        </div>
-    )
-}
+  return (
+    <>
+      <Header />
+    </>
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

@@ -8,11 +8,9 @@ const LoginPage = () => {
   return (
     <Box className={classes.rootContainer}>
       <Grid container direction="column" justify="center" alignItems="center">
-        {/* <Grid item> */}
-          <Box width={"25%"} className={classes.loginContainer}>
-            <LoginContent />
-          </Box>
-        {/* </Grid> */}
+        <Box width={"25%"} className={classes.loginContainer}>
+          <LoginContent />
+        </Box>
       </Grid>
     </Box>
   );
