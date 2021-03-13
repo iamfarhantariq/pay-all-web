@@ -13,8 +13,10 @@ import {
 import { authRoutes } from "./routes/Auth";
 import loggedIn from "./utils/loggedIn";
 import theme from "./theme";
+import { Box } from "@material-ui/core";
 
 ReactDOM.render(
+  // <Box width={1} height={1}>
   <ThemeProvider theme={theme}>
     <Router>
       <Switch>
@@ -30,6 +32,7 @@ ReactDOM.render(
       </Switch>
     </Router>
   </ThemeProvider>,
+  // </Box>,
   document.getElementById("root")
 );
 
