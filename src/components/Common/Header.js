@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  AppBar,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { Grid, AppBar, Toolbar, Typography } from "@material-ui/core";
 import { NAV_BAR_COLOR } from "../../constants/colors";
 import { PROJECT_NAME } from "../../constants/strings";
 
@@ -40,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = new useStyles();
 
+  const handleClick = (type) => {
+    return window.location.assign(
+      type === "organization"
+        ? "/register-user/organization"
+        : "/register-user/personal"
+    );
+  };
+
   return (
     <>
       <AppBar position="fixed" elevation={0} className={classes.AppBar}>
@@ -52,10 +55,18 @@ const Header = () => {
             >
               {PROJECT_NAME}
             </Typography>
-            <Typography color="inherit" className={classes.buttonFontSize}>
+            <Typography
+              color="inherit"
+              className={classes.buttonFontSize}
+              onClick={() => handleClick("organization")}
+            >
               Register a company account
             </Typography>
-            <Typography color="inherit" className={classes.buttonFontSize}>
+            <Typography
+              color="inherit"
+              className={classes.buttonFontSize}
+              onClick={() => handleClick("personal")}
+            >
               Register a private account
             </Typography>
             <Grid className={classes.grow} />

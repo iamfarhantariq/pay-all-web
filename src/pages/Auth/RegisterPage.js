@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     lineHeight: 1.4,
   },
-  welcomeBox: {
+  headingBox: {
     backgroundColor: BACKGROUND_COLOR,
     padding: "3rem 0",
     marginTop: "4rem",
@@ -69,11 +69,19 @@ const RegisterPage = () => {
     document.title = "Register";
   }, []);
 
+  const handleClick = (type) => {
+    return window.location.assign(
+      type === "organization"
+        ? "/register-user/organization"
+        : "/register-user/personal"
+    );
+  };
+
   return (
     <>
       <Box width={1}>
         <Header />
-        <Box width={1} className={classes.welcomeBox}>
+        <Box width={1} className={classes.headingBox}>
           <Container maxWidth="sm">
             <Box>
               <Typography
@@ -111,7 +119,10 @@ const RegisterPage = () => {
                   <Typography variant="body4" className={classes.description}>
                     {COMPANY_DESCRIPTION}
                   </Typography>
-                  <Box className={classes.card}>
+                  <Box
+                    className={classes.card}
+                    onClick={() => handleClick("organization")}
+                  >
                     <Typography
                       variant="subtitle1"
                       className={classes.description}
@@ -150,7 +161,10 @@ const RegisterPage = () => {
                   <Typography variant="body4" className={classes.description}>
                     {COMPANY_DESCRIPTION}
                   </Typography>
-                  <Box className={classes.card}>
+                  <Box
+                    className={classes.card}
+                    onClick={() => handleClick("personal")}
+                  >
                     <Typography
                       variant="subtitle1"
                       className={classes.description}
