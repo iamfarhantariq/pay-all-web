@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import cookie from "js-cookie";
 import {
   Grid,
   AppBar,
@@ -13,6 +14,8 @@ import { NAV_BAR_COLOR } from "../../constants/colors";
 import { PROJECT_NAME } from "../../constants/strings";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import loggedIn from "../../utils/loggedIn";
+import { BEARER_TOKEN } from "../../constants/cookies";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -61,6 +64,11 @@ const Header = () => {
     );
   };
 
+  const handleLogout = () => {
+    cookie.remove(BEARER_TOKEN);
+    window.location.reload();
+  };
+
   const Menus = () => {
     return (
       <>
@@ -87,41 +95,42 @@ const Header = () => {
       <AppBar position="fixed" elevation={0} className={classes.AppBar}>
         <Grid sm={12} xs={12}>
           <Toolbar>
-            <Hidden only={["lg", "md"]}>
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="menu"
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-              >
-                <MenuIcon style={{ color: "white" }} />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    handleClick("organization");
-                  }}
+            {!loggedIn() && (
+              <Hidden only={["lg", "md"]}>
+                <IconButton
+                  edge="start"
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={(event) => setAnchorEl(event.currentTarget)}
                 >
-                  Register a company account
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    handleClick("personal");
-                  }}
+                  <MenuIcon style={{ color: "white" }} />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
                 >
-                  Register a private account
-                </MenuItem>
-              </Menu>
-            </Hidden>
-
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      handleClick("organization");
+                    }}
+                  >
+                    Register a company account
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      handleClick("personal");
+                    }}
+                  >
+                    Register a private account
+                  </MenuItem>
+                </Menu>
+              </Hidden>
+            )}
             <Typography
               variant="h2"
               className={classes.title}
@@ -129,17 +138,29 @@ const Header = () => {
             >
               {PROJECT_NAME}
             </Typography>
-            <Hidden only={["sm", "xs"]}>
-              <Menus />
-            </Hidden>
+            {!loggedIn() && (
+              <Hidden only={["sm", "xs"]}>
+                <Menus />
+              </Hidden>
+            )}
             <Grid className={classes.grow} />
-            <Typography
-              color="inherit"
-              className={classes.buttonFontSize}
-              onClick={() => window.location.assign("/")}
-            >
-              Login instead
-            </Typography>
+            {loggedIn() ? (
+              <Typography
+                color="inherit"
+                className={classes.buttonFontSize}
+                onClick={handleLogout}
+              >
+                Logout
+              </Typography>
+            ) : (
+              <Typography
+                color="inherit"
+                className={classes.buttonFontSize}
+                onClick={() => window.location.assign("/")}
+              >
+                Login instead
+              </Typography>
+            )}
           </Toolbar>
         </Grid>
       </AppBar>

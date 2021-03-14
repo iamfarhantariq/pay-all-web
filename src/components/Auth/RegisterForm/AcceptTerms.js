@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
@@ -67,7 +67,7 @@ const AcceptTerms = () => {
                 value={accept}
                 control={
                   <Checkbox
-                    color="seconday"
+                    color="secondary"
                     checked={accept}
                     onChange={(event) => setAccept(event.target.checked)}
                   />

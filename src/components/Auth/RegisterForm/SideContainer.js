@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   containerDescription: {
     fontFamily: "Roboto",
     color: NAV_BAR_COLOR,
-    fontWeight: 400,
     lineHeight: 1.4,
     fontSize: "12px",
     fontWeight: "bold",
@@ -46,7 +45,6 @@ const SideContainer = () => {
     <Box
       style={{
         padding: "2rem",
-        position: "-webkit-sticky",
         top: "4rem",
         position: "sticky",
       }}

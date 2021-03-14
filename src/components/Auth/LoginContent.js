@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import cookie from "js-cookie";
 import logo from "../../assets/logo.png";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { TextFieldProps } from "../../utils/defaultProps";
+import { BEARER_TOKEN } from "../../constants/cookies";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -29,6 +31,11 @@ const LoginContent = () => {
     } else {
       setPasswordType("password");
     }
+  };
+
+  const handleSignin = () => {
+    cookie.set(BEARER_TOKEN, "sjdfhgaskdjfkjsadf");
+    window.location.assign("/");
   };
 
   return (
@@ -80,6 +87,7 @@ const LoginContent = () => {
             color="primary"
             size="large"
             style={{ color: "white" }}
+            onClick={handleSignin}
           >
             Login
           </Button>

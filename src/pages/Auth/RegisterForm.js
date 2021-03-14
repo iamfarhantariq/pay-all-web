@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
-import { Box, Button, Container, Grid, Hidden } from "@material-ui/core";
+import { Box, Container, Grid, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Common/Header";
-import {
-  BACKGROUND_COLOR,
-  NAV_BAR_COLOR,
-  PRIMARY_COLOR,
-} from "../../constants/colors";
+import { BACKGROUND_COLOR } from "../../constants/colors";
 import TitleHeader from "../../components/Auth/RegisterForm/TitleHeader";
 import path from "../../utils/urlPath";
 import AccountInfo from "../../components/Auth/RegisterForm/AccountInfo";
