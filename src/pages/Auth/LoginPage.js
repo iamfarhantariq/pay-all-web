@@ -10,10 +10,10 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   loginContainer: {
-    padding: "32px 48px",
+    padding: "1rem 2rem",
     backgroundColor: "white",
-    margin: "7rem 0",
-    width: "20rem",
+    margin: "6rem 1rem",
+    maxWidth: "22rem"
   },
 }));
 
@@ -25,10 +25,21 @@ const LoginPage = () => {
 
   return (
     <Box className={classes.rootContainer}>
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Box className={classes.loginContainer}>
-          <LoginContent />
-        </Box>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Box
+            display="flex"
+            justifyContent="center"
+            className={classes.loginContainer}
+          >
+            <LoginContent />
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );

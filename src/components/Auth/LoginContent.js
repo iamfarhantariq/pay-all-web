@@ -47,18 +47,17 @@ const LoginContent = () => {
         alignItems="center"
         spacing={2}
       >
-        <Box>
-          <img src={logo} alt="logo" height="80px" />
-        </Box>
-        <Grid item container>
+        <Grid item>
+          <img src={logo} alt="logo" height="130px" />
+        </Grid>
+        <Grid item>
           <TextField
             name="email"
             label="Email"
             placeholder="john@example.com"
             {...TextFieldProps}
+            style={{ marginBottom: "0.5rem" }}
           />
-        </Grid>
-        <Grid item container>
           <TextField
             name="password"
             label="Password"
@@ -78,9 +77,8 @@ const LoginContent = () => {
                 </InputAdornment>
               ),
             }}
+            style={{ marginBottom: "1rem" }}
           />
-        </Grid>
-        <Grid item container>
           <Button
             fullWidth
             variant="contained"
@@ -92,20 +90,20 @@ const LoginContent = () => {
             Login
           </Button>
         </Grid>
-        <Box>
-          <Typography variant="body2" className={classes.bottomText}>
-            I have forgotten my details
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            variant="body2"
-            className={classes.bottomText}
-            onClick={() => window.location.assign("/register-user")}
-          >
-            No account? Get one now
-          </Typography>
-        </Box>
+        <Grid item>
+          <Box>
+            <Typography variant="body2" className={classes.bottomText}>
+              I have forgotten my details
+            </Typography>
+            <Typography
+              variant="body2"
+              className={classes.bottomText}
+              onClick={() => window.location.assign("/register-user")}
+            >
+              No account? Get one now
+            </Typography>
+          </Box>
+        </Grid>
       </Grid>
     </>
   );
