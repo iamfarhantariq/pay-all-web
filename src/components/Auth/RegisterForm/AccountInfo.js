@@ -104,7 +104,6 @@ const AccountInfo = () => {
               placeholder="My difficult password"
               {...TextFieldProps}
               type={passwordType}
-              defaultValue="2000-02-15"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -132,8 +131,8 @@ const AccountInfo = () => {
                   ? "Firm signatory date of birth"
                   : "Date of birth"
               }
-              placeholder="14/5/2000"
               type="date"
+              defaultValue="2000-02-15"
               {...TextFieldProps}
               InputLabelProps={{
                 shrink: true,
