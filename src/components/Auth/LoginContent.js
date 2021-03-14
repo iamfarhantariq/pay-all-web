@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import { TextFieldProps } from "../../utils/defaultProps";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -44,24 +45,18 @@ const LoginContent = () => {
         </Box>
         <Grid item container>
           <TextField
-            fullWidth
             name="email"
             label="Email"
             placeholder="john@example.com"
-            variant="outlined"
-            color="secondary"
-            margin="dense"
+            {...TextFieldProps}
           />
         </Grid>
         <Grid item container>
           <TextField
-            fullWidth
             name="password"
             label="Password"
             placeholder="Your Password"
-            variant="outlined"
-            color="secondary"
-            margin="dense"
+            {...TextFieldProps}
             type={passwordType}
             InputProps={{
               endAdornment: (

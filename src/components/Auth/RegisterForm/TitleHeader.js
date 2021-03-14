@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Grid, Hidden, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import BusinessImage from "../../../assets/business.svg";
@@ -28,13 +28,6 @@ const useStyles = makeStyles((theme) => ({
 const TitleHeader = () => {
   const classes = new useStyles();
 
-  // const path = () => {
-  //   if (window.location.pathname === "/register-user/organization") {
-  //     return "organization";
-  //   }
-  //   return "personal";
-  // };
-
   return (
     <div>
       <Container maxWidth="md">
@@ -56,7 +49,7 @@ const TitleHeader = () => {
             </Typography>
             <Typography variant="body3" className={classes.description}>
               {path() === "organization"
-                ? "In order to use Billhop you need to register your business with us using the form below."
+                ? `In order to use ${PROJECT_NAME} you need to register your business with us using the form below.`
                 : `To get started with ${PROJECT_NAME}, you have to register an account. Enter your e-mail and choose a password and identify yourself by entering your official address.`}
             </Typography>
           </Grid>

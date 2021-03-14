@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box } from "@material-ui/core";
+import { Box, Button, Container, Grid, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Common/Header";
 import {
@@ -9,21 +9,13 @@ import {
 } from "../../constants/colors";
 import TitleHeader from "../../components/Auth/RegisterForm/TitleHeader";
 import path from "../../utils/urlPath";
+import AccountInfo from "../../components/Auth/RegisterForm/AccountInfo";
+import OtherInfo from "../../components/Auth/RegisterForm/AddressCompany";
+import OwnwerStructure from "../../components/Auth/RegisterForm/OwnerStructure";
+import AcceptTerms from "../../components/Auth/RegisterForm/AcceptTerms";
+import SideContainer from "../../components/Auth/RegisterForm/SideContainer";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    fontFamily: "Roboto",
-    color: NAV_BAR_COLOR,
-    fontWeight: 900,
-    lineHeight: 1.1,
-    marginBottom: "1rem",
-  },
-  description: {
-    fontFamily: "Roboto",
-    color: NAV_BAR_COLOR,
-    fontWeight: 400,
-    lineHeight: 1.4,
-  },
   headingBox: {
     backgroundColor: BACKGROUND_COLOR,
     padding: "3rem 0",
@@ -32,29 +24,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-  },
-  containerBox: {
-    margin: "2rem",
-    display: "block",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  card: {
-    backgroundColor: PRIMARY_COLOR,
-    "&:hover": {
-      background: "#98b571",
-    },
-    padding: "0.5rem 0",
-    margin: "1rem 0",
-    cursor: "pointer",
-  },
-  bottomButton: {
-    color: "white",
-    float: "center",
-    display: "block",
-    margin: "0 auto",
-    marginBottom: "3rem",
   },
 }));
 
@@ -67,12 +36,30 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Box width={1}>
+      <Box width={1} style={{ backgroundColor: "#f9f9f9" }}>
         <Header />
         <Box width={1} className={classes.headingBox}>
           <TitleHeader />
         </Box>
-        <Box width={1}></Box>
+        <Box width={1}>
+          <Container maxWidth="lg">
+            <Grid container spacing={1} direction="row">
+              <Grid item lg={9} md={12}>
+                <Box style={{}}>
+                  <AccountInfo />
+                  <OtherInfo />
+                  <OwnwerStructure />
+                  <AcceptTerms />
+                </Box>
+              </Grid>
+              <Hidden only={["md", "sm", "xs"]}>
+                <Grid item lg={3}>
+                  <SideContainer />
+                </Grid>
+              </Hidden>
+            </Grid>
+          </Container>
+        </Box>
       </Box>
     </>
   );
