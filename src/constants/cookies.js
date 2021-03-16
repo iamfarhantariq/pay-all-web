@@ -1,1 +1,1 @@
-export const BEARER_TOKEN = "access_token";
+export const BEARER_TOKEN = "token";

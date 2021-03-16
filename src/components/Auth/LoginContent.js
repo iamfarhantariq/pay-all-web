@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, TextField, Typography } from "@material-ui/core";
+import { Box, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cookie from "js-cookie";
+import { useFormik } from "formik";
 import logo from "../../assets/logo.png";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -9,6 +10,10 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { TextFieldProps } from "../../utils/defaultProps";
 import { BEARER_TOKEN } from "../../constants/cookies";
+import { PostButton } from "../Common/PostButton";
+import { authenticate } from "../../services/Auth";
+import { authSchema } from "../../validation";
+// import { useAlert } from "react-alert";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -23,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginContent = () => {
   const classes = new useStyles();
+  // const reactAlert = new useAlert();
   const [passwordType, setPasswordType] = useState("password");
+  const [loading, setLoading] = useState(false);
 
   const handleClickShowPassword = () => {
     if (passwordType === "password") {
@@ -33,10 +40,40 @@ const LoginContent = () => {
     }
   };
 
-  const handleSignin = () => {
-    cookie.set(BEARER_TOKEN, "sjdfhgaskdjfkjsadf");
-    window.location.assign("/");
-  };
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleReset,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => {
+      setLoading(true);
+      authenticate(values)
+        .then(({ data }) => {
+          console.log(data);
+          // reactAlert.show("Successfull!", "success");
+          cookie.set(BEARER_TOKEN, data.token);
+          setLoading(false);
+          handleReset();
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log({ error });
+          if (error && error.response.status === 401) {
+            alert("Invalid Email or Password");
+          }
+          setLoading(false);
+        });
+    },
+    validationSchema: authSchema,
+  });
 
   return (
     <>
@@ -56,6 +93,11 @@ const LoginContent = () => {
             label="Email"
             placeholder="john@example.com"
             {...TextFieldProps}
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email && touched.email ? true : false}
+            helperText={errors.email && touched.email ? errors.email : ""}
             style={{ marginBottom: "0.5rem" }}
           />
           <TextField
@@ -63,6 +105,13 @@ const LoginContent = () => {
             label="Password"
             placeholder="Your Password"
             {...TextFieldProps}
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.password && touched.password ? true : false}
+            helperText={
+              errors.password && touched.password ? errors.password : ""
+            }
             type={passwordType}
             InputProps={{
               endAdornment: (
@@ -79,16 +128,12 @@ const LoginContent = () => {
             }}
             style={{ marginBottom: "1rem" }}
           />
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            size="large"
-            style={{ color: "white" }}
-            onClick={handleSignin}
-          >
-            Login
-          </Button>
+          <PostButton
+            text="Login"
+            onClick={handleSubmit}
+            loading={loading}
+            disabled={loading}
+          />
         </Grid>
         <Grid item>
           <Box>

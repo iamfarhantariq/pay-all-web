@@ -15,6 +15,7 @@ import { PROJECT_NAME } from "../../../constants/strings";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import CloseIcon from "@material-ui/icons/Close";
 import CheckIcon from "@material-ui/icons/Check";
+import { PostButton } from "../../Common/PostButton";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -43,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AcceptTerms = () => {
+const AcceptTerms = (props) => {
+  const { values, handleSubmit, loading } = props;
+
   const classes = new useStyles();
   const [accept, setAccept] = useState(false);
   const [pep, setPep] = useState(null);
@@ -130,7 +133,10 @@ const AcceptTerms = () => {
                   size="small"
                   startIcon={<CloseIcon />}
                   style={{ marginTop: "0.5rem", marginRight: "0.5rem" }}
-                  onClick={() => setPep(false)}
+                  onClick={() => {
+                    values.pep = false;
+                    setPep(false);
+                  }}
                 >
                   No, I'm not PEP
                 </Button>
@@ -140,7 +146,10 @@ const AcceptTerms = () => {
                   size="small"
                   startIcon={<CheckIcon />}
                   style={{ marginTop: "0.5rem" }}
-                  onClick={() => setPep(true)}
+                  onClick={() => {
+                    values.pep = true;
+                    setPep(true);
+                  }}
                 >
                   Yes, I'm PEP
                 </Button>
@@ -160,17 +169,16 @@ const AcceptTerms = () => {
         </Grid>
         <Grid item xs={12}>
           <Box width={1}>
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              size="large"
-              style={{ color: "white" }}
-            >
-              {path() === "organization"
-                ? "Register my business"
-                : "Register account"}
-            </Button>
+            <PostButton
+              text={
+                path() === "organization"
+                  ? "Register my business"
+                  : "Register account"
+              }
+              onClick={handleSubmit}
+              loading={loading}
+              disabled={accept && !loading ? false : true}
+            />
           </Box>
         </Grid>
       </Grid>

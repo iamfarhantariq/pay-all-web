@@ -69,7 +69,8 @@ const PChoices = [
   },
 ];
 
-const OwnwerStructure = () => {
+const OwnwerStructure = (props) => {
+  const { values } = props;
   const classes = new useStyles();
   const [value, setValue] = useState("");
   const [choices, setChoices] = useState([]);
@@ -112,6 +113,9 @@ const OwnwerStructure = () => {
               value={value}
               onChange={(e) => {
                 setValue(e.target.value);
+                path() === "organization"
+                  ? (values.ownerStructure = e.target.value)
+                  : (values.foundUsBy = e.target.value);
               }}
             >
               {choices.map((choice, index) => {

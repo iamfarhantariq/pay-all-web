@@ -8,4 +8,11 @@ const loggedIn = () => {
   return false;
 };
 
+export function getToken() {
+  if (cookie.get(BEARER_TOKEN)) {
+    return cookie.get(BEARER_TOKEN);
+  }
+  return "";
+}
+
 export default loggedIn;

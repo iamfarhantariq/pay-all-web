@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Grid, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Common/Header";
 import { BACKGROUND_COLOR } from "../../constants/colors";
 import TitleHeader from "../../components/Auth/RegisterForm/TitleHeader";
 import path from "../../utils/urlPath";
+import { useFormik } from "formik";
 import AccountInfo from "../../components/Auth/RegisterForm/AccountInfo";
 import OtherInfo from "../../components/Auth/RegisterForm/AddressCompany";
 import OwnwerStructure from "../../components/Auth/RegisterForm/OwnerStructure";
 import AcceptTerms from "../../components/Auth/RegisterForm/AcceptTerms";
 import SideContainer from "../../components/Auth/RegisterForm/SideContainer";
+import { organizationSchema, personalSchema } from "../../validation";
+import { registerUser } from "../../services/Auth";
+import { BEARER_TOKEN } from "../../constants/cookies";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   headingBox: {
@@ -25,10 +30,71 @@ const useStyles = makeStyles((theme) => ({
 
 const RegisterForm = () => {
   const classes = new useStyles();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.title = `Register ${path()}`;
   }, []);
+
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleReset,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      firstName: "",
+      surName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      dateOfBirth: "",
+      address: "",
+      houseNumber: "",
+      city: "",
+      type: path(),
+      companyWebsite: "",
+      country: "",
+      postalCode: "",
+      foundUsBy: "",
+      ownerStructure: "",
+      pep: false,
+      companyName: "",
+      companyNumber: "",
+      mainIndustry: "",
+    },
+    onSubmit: (values) => {
+      setLoading(true);
+      registerUser(values)
+        .then(({ data }) => {
+          console.log(data);
+          Cookies.set(BEARER_TOKEN, data.token);
+          setLoading(false);
+          handleReset();
+          window.location.replace("/");
+        })
+        .catch((error) => {
+          console.log({ error });
+          if (error && error.response.status === 422) {
+            alert("Email Exists");
+          }
+          setLoading(false);
+        });
+    },
+    validationSchema:
+      path() === "organization" ? organizationSchema : personalSchema,
+  });
+
+  const prop = {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+  };
 
   return (
     <>
@@ -42,10 +108,14 @@ const RegisterForm = () => {
             <Grid container spacing={1} direction="row">
               <Grid item lg={9} md={12}>
                 <Box style={{}}>
-                  <AccountInfo />
-                  <OtherInfo />
-                  <OwnwerStructure />
-                  <AcceptTerms />
+                  <AccountInfo {...prop} />
+                  <OtherInfo {...prop} />
+                  <OwnwerStructure {...prop} />
+                  <AcceptTerms
+                    {...prop}
+                    handleSubmit={handleSubmit}
+                    loading={loading}
+                  />
                 </Box>
               </Grid>
               <Hidden only={["md", "sm", "xs"]}>

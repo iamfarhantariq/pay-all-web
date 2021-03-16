@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, Box, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  NAV_BAR_COLOR,
-} from "../../../constants/colors";
+import { NAV_BAR_COLOR } from "../../../constants/colors";
 import { PROJECT_NAME } from "../../../constants/strings";
 import path from "../../../utils/urlPath";
 import { TextFieldProps } from "../../../utils/defaultProps";
@@ -48,7 +46,8 @@ const OrganizationDescription = () => {
   );
 };
 
-const AccountInfo = () => {
+const AccountInfo = (props) => {
+  const { values, errors, touched, handleChange, handleBlur } = props;
   const classes = new useStyles();
   const [passwordType, setPasswordType] = useState("password");
 
@@ -83,12 +82,26 @@ const AccountInfo = () => {
               placeholder="John"
               {...TextFieldProps}
               style={{ marginRight: "1rem" }}
+              value={values.firstName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.firstName && touched.firstName ? true : false}
+              helperText={
+                errors.firstName && touched.firstName ? errors.firstName : ""
+              }
             />
             <TextField
               name="surName"
               label="Sur Name"
               placeholder="Murffy"
               {...TextFieldProps}
+              value={values.surName}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.surName && touched.surName ? true : false}
+              helperText={
+                errors.surName && touched.surName ? errors.surName : ""
+              }
             />
           </Box>
           <Box width={1}>
@@ -97,6 +110,11 @@ const AccountInfo = () => {
               label="Email"
               placeholder="John@example.com"
               {...TextFieldProps}
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email && touched.email ? true : false}
+              helperText={errors.email && touched.email ? errors.email : ""}
             />
             <TextField
               name="password"
@@ -104,6 +122,13 @@ const AccountInfo = () => {
               placeholder="My difficult password"
               {...TextFieldProps}
               type={passwordType}
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password && touched.password ? true : false}
+              helperText={
+                errors.password && touched.password ? errors.password : ""
+              }
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -119,13 +144,22 @@ const AccountInfo = () => {
               }}
             />
             <TextField
-              name="phone"
+              name="phoneNumber"
               label="Phone Number"
               placeholder="07400 123456"
               {...TextFieldProps}
+              value={values.phoneNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.phoneNumber && touched.phoneNumber ? true : false}
+              helperText={
+                errors.phoneNumber && touched.phoneNumber
+                  ? errors.phoneNumber
+                  : ""
+              }
             />
             <TextField
-              name="dob"
+              name="dateOfBirth"
               label={
                 path() === "organization"
                   ? "Firm signatory date of birth"
@@ -134,6 +168,15 @@ const AccountInfo = () => {
               type="date"
               defaultValue="2000-02-15"
               {...TextFieldProps}
+              value={values.dateOfBirth}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.dateOfBirth && touched.dateOfBirth ? true : false}
+              helperText={
+                errors.dateOfBirth && touched.dateOfBirth
+                  ? errors.dateOfBirth
+                  : ""
+              }
               InputLabelProps={{
                 shrink: true,
               }}

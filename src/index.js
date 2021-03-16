@@ -4,17 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core/styles";
-import {
-  BrowserRouter as Router,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import theme from "./theme";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Router>
       <Switch>
-        <App />
+          <App />
       </Switch>
     </Router>
   </ThemeProvider>,

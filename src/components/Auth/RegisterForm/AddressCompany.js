@@ -45,7 +45,9 @@ const OrganizationDescription = () => {
   );
 };
 
-const OtherInfo = () => {
+const OtherInfo = (props) => {
+  const { values, errors, touched, handleChange, handleBlur } = props;
+
   const classes = new useStyles();
 
   return (
@@ -73,12 +75,32 @@ const OtherInfo = () => {
                 label="Company Name"
                 placeholder="Company Name"
                 {...TextFieldProps}
+                value={values.companyName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.companyName && touched.companyName ? true : false}
+                helperText={
+                  errors.companyName && touched.companyName
+                    ? errors.companyName
+                    : ""
+                }
               />
               <TextField
                 name="companyNumber"
                 label="Company Number"
                 placeholder="Company Number"
                 {...TextFieldProps}
+                value={values.companyNumber}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={
+                  errors.companyNumber && touched.companyNumber ? true : false
+                }
+                helperText={
+                  errors.companyNumber && touched.companyNumber
+                    ? errors.companyNumber
+                    : ""
+                }
               />
               <TextField
                 name="mainIndustry"
@@ -86,6 +108,17 @@ const OtherInfo = () => {
                 placeholder="Choose industry"
                 select
                 {...TextFieldProps}
+                value={values.mainIndustry}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={
+                  errors.mainIndustry && touched.mainIndustry ? true : false
+                }
+                helperText={
+                  errors.mainIndustry && touched.mainIndustry
+                    ? errors.mainIndustry
+                    : ""
+                }
               >
                 {industries.map((industry) => {
                   return (
@@ -100,15 +133,33 @@ const OtherInfo = () => {
                 label="Company Website"
                 placeholder="www.the-website.com"
                 {...TextFieldProps}
+                value={values.companyWebsite}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={
+                  errors.companyWebsite && touched.companyWebsite ? true : false
+                }
+                helperText={
+                  errors.companyWebsite && touched.companyWebsite
+                    ? errors.companyWebsite
+                    : ""
+                }
               />
             </Box>
           )}
           <Box width={1} style={{ display: "inline-flex" }}>
             <TextField
-              name="postcode"
+              name="postalCode"
               label="Postcode"
-              placeholder="Postcode"
+              placeholder="PostalCode"
               {...TextFieldProps}
+              value={values.postalCode}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.postalCode && touched.postalCode ? true : false}
+              helperText={
+                errors.postalCode && touched.postalCode ? errors.postalCode : ""
+              }
               style={{ marginRight: "1rem" }}
             />
             <TextField
@@ -116,6 +167,15 @@ const OtherInfo = () => {
               label="House Number"
               placeholder="House Number"
               {...TextFieldProps}
+              value={values.houseNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.houseNumber && touched.houseNumber ? true : false}
+              helperText={
+                errors.houseNumber && touched.houseNumber
+                  ? errors.houseNumber
+                  : ""
+              }
             />
           </Box>
           <Box width={1}>
@@ -124,6 +184,13 @@ const OtherInfo = () => {
               label="Address"
               placeholder="Address"
               {...TextFieldProps}
+              value={values.address}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.address && touched.address ? true : false}
+              helperText={
+                errors.address && touched.address ? errors.address : ""
+              }
             />
           </Box>
           <Box width={1} style={{ display: "inline-flex" }}>
@@ -132,6 +199,11 @@ const OtherInfo = () => {
               label="City"
               placeholder="City"
               {...TextFieldProps}
+              value={values.city}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.city && touched.city ? true : false}
+              helperText={errors.city && touched.city ? errors.city : ""}
               style={{ marginRight: "1rem" }}
             />
             <TextField
@@ -139,6 +211,13 @@ const OtherInfo = () => {
               label="Country"
               placeholder="Country"
               {...TextFieldProps}
+              value={values.country}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.country && touched.country ? true : false}
+              helperText={
+                errors.country && touched.country ? errors.country : ""
+              }
             />
           </Box>
         </Grid>
