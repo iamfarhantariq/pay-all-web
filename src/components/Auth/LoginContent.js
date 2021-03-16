@@ -66,7 +66,7 @@ const LoginContent = () => {
         })
         .catch((error) => {
           console.log({ error });
-          if (error && error.response.status === 401) {
+          if (error.response != undefined && error.response.status === 401) {
             alert("Invalid Email or Password");
           }
           setLoading(false);
