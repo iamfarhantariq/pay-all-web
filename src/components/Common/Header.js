@@ -38,12 +38,12 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontSize: 16,
     fontFamily: "Roboto",
-    letterSpacing: 0.6,
+    letterSpacing: 0.5,
     marginLeft: "2rem",
   },
   buttonFontSize: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Roboto",
     letterSpacing: 1.2,
     fontWeight: "bold",
@@ -186,7 +186,6 @@ const Header = () => {
                     Farhan Tariq
                   </Typography>
                   <ArrowDropDownIcon
-                    fontSize="large"
                     style={{ color: "white" }}
                   />
                 </Box>
