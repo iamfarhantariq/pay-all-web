@@ -13,8 +13,10 @@ import AcceptTerms from "../../components/Auth/RegisterForm/AcceptTerms";
 import SideContainer from "../../components/Auth/RegisterForm/SideContainer";
 import { organizationSchema, personalSchema } from "../../validation";
 import { registerUser } from "../../services/Auth";
-import { BEARER_TOKEN } from "../../constants/cookies";
+import { BEARER_TOKEN, USER_REF } from "../../constants/cookies";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { setSnackbar } from "../../redux/actions/snackBar";
 
 const useStyles = makeStyles((theme) => ({
   headingBox: {
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RegisterForm = () => {
   const classes = new useStyles();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -72,6 +75,8 @@ const RegisterForm = () => {
         .then(({ data }) => {
           console.log(data);
           Cookies.set(BEARER_TOKEN, data.token);
+          Cookies.set(USER_REF, data.user._id);
+          dispatch(setSnackbar(true, "success", "Successfully Registered!"));
           setLoading(false);
           handleReset();
           window.location.replace("/");

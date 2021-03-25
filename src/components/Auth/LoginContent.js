@@ -15,6 +15,8 @@ import { BEARER_TOKEN, USER_REF } from "../../constants/cookies";
 import { PostButton } from "../Common/PostButton";
 import { authenticate } from "../../services/Auth";
 import { authSchema } from "../../validation";
+import { useDispatch } from "react-redux";
+import { setSnackbar } from "../../redux/actions/snackBar";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginContent = (props) => {
   const classes = new useStyles();
+  const dispatch = useDispatch();
   const [passwordType, setPasswordType] = useState("password");
   const [loading, setLoading] = useState(false);
 
@@ -63,6 +66,7 @@ const LoginContent = (props) => {
           // props.addMasterData(data);
           setLoading(false);
           handleReset();
+          dispatch(setSnackbar(true, "success", "Successfull!"));
           window.location.reload();
         })
         .catch((error) => {

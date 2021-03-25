@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { configureStore, history } from "./redux/configureStore";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import theme from "./theme";
+import SnackBarComponent from "./components/Common/SnackBar";
 
 const store = configureStore();
 
@@ -20,6 +21,7 @@ ReactDOM.render(
         </Switch>
       </Router>
     </ThemeProvider>
+    <SnackBarComponent />
   </Provider>,
   document.getElementById("root")
 );
