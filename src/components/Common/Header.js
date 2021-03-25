@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import cookie from "js-cookie";
 import {
@@ -9,6 +9,7 @@ import {
   Hidden,
   Menu,
   MenuItem,
+  Box,
 } from "@material-ui/core";
 import { NAV_BAR_COLOR } from "../../constants/colors";
 import { PROJECT_NAME } from "../../constants/strings";
@@ -16,6 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import loggedIn from "../../utils/loggedIn";
 import { BEARER_TOKEN } from "../../constants/cookies";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -32,11 +34,19 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  buttonFontSize: {
+  middleText: {
     color: "white",
     fontSize: 16,
     fontFamily: "Roboto",
+    letterSpacing: 0.6,
+    marginLeft: "2rem",
+  },
+  buttonFontSize: {
+    color: "white",
+    fontSize: 18,
+    fontFamily: "Roboto",
     letterSpacing: 1.2,
+    fontWeight: "bold",
     cursor: "pointer",
     marginLeft: "2rem",
     "&:hover": {
@@ -50,10 +60,19 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = new useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [rightMenu, setRightMenu] = useState(null);
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMenuClick = (event) => {
+    setRightMenu(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setRightMenu(null);
   };
 
   const handleClick = (type) => {
@@ -96,7 +115,7 @@ const Header = () => {
         <Grid sm={12} xs={12}>
           <Toolbar>
             {!loggedIn() && (
-              <Hidden only={["lg", "md"]}>
+              <Hidden only={["xl", "lg", "md"]}>
                 <IconButton
                   edge="start"
                   className={classes.menuButton}
@@ -138,20 +157,57 @@ const Header = () => {
             >
               {PROJECT_NAME}
             </Typography>
-            {!loggedIn() && (
+            {!loggedIn() ? (
               <Hidden only={["sm", "xs"]}>
                 <Menus />
+              </Hidden>
+            ) : (
+              <Hidden only={["sm", "xs"]}>
+                <Typography color="inherit" className={classes.middleText}>
+                  Good morning Farhan
+                </Typography>
               </Hidden>
             )}
             <Grid className={classes.grow} />
             {loggedIn() ? (
-              <Typography
-                color="inherit"
-                className={classes.buttonFontSize}
-                onClick={handleLogout}
-              >
-                Logout
-              </Typography>
+              <>
+                <Box
+                  style={{
+                    display: "inline-flex",
+                    cursor: "pointer",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    color="inherit"
+                    className={classes.buttonFontSize}
+                    onClick={handleMenuClick}
+                  >
+                    Farhan Tariq
+                  </Typography>
+                  <ArrowDropDownIcon
+                    fontSize="large"
+                    style={{ color: "white" }}
+                  />
+                </Box>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={rightMenu}
+                  keepMounted
+                  open={Boolean(rightMenu)}
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleLogout();
+                      handleMenuClose();
+                    }}
+                  >
+                    Log out
+                  </MenuItem>
+                </Menu>
+              </>
             ) : (
               <Typography
                 color="inherit"

@@ -25,19 +25,6 @@ const App = () => {
               exact={route.exact}
             />
           ))}
-      {/* {loggedIn() ? (
-        protectedRoutes.map((route, index) => (
-          <ProtectedRoute
-            isPrivate={true}
-            key={index}
-            path={route.path}
-            component={route.component}
-            exact={route.exact}
-          />
-        ))
-      ) : (
-        <Redirect to="/" />
-      )} */}
     </>
   );
 };

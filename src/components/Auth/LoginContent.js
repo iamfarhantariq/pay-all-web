@@ -13,7 +13,6 @@ import { BEARER_TOKEN } from "../../constants/cookies";
 import { PostButton } from "../Common/PostButton";
 import { authenticate } from "../../services/Auth";
 import { authSchema } from "../../validation";
-// import { useAlert } from "react-alert";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -28,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginContent = () => {
   const classes = new useStyles();
-  // const reactAlert = new useAlert();
   const [passwordType, setPasswordType] = useState("password");
   const [loading, setLoading] = useState(false);
 
@@ -58,7 +56,6 @@ const LoginContent = () => {
       authenticate(values)
         .then(({ data }) => {
           console.log(data);
-          // reactAlert.show("Successfull!", "success");
           cookie.set(BEARER_TOKEN, data.token);
           setLoading(false);
           handleReset();
@@ -66,7 +63,7 @@ const LoginContent = () => {
         })
         .catch((error) => {
           console.log({ error });
-          if (error.response != undefined && error.response.status === 401) {
+          if (error.response !== undefined && error.response.status === 401) {
             alert("Invalid Email or Password");
           }
           setLoading(false);
