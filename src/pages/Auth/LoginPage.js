@@ -28,13 +28,11 @@ const LoginPage = () => {
       <Grid
         container
         direction="column"
-        justifyContent="center"
         alignItems="center"
       >
         <Grid item>
           <Box
             display="flex"
-            justifyContent="center"
             className={classes.loginContainer}
           >
             <LoginContent />

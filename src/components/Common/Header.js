@@ -112,7 +112,7 @@ const Header = () => {
   return (
     <>
       <AppBar position="fixed" elevation={0} className={classes.AppBar}>
-        <Grid sm={12} xs={12}>
+        <Grid>
           <Toolbar>
             {!loggedIn() && (
               <Hidden only={["xl", "lg", "md"]}>

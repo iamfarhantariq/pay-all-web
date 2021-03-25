@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Box, Grid, TextField, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import cookie from "js-cookie";
 import { useFormik } from "formik";
+import { addMasterData } from "../../redux/actions/masterData";
 import logo from "../../assets/logo.png";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { TextFieldProps } from "../../utils/defaultProps";
-import { BEARER_TOKEN } from "../../constants/cookies";
+import { BEARER_TOKEN, USER_REF } from "../../constants/cookies";
 import { PostButton } from "../Common/PostButton";
 import { authenticate } from "../../services/Auth";
 import { authSchema } from "../../validation";
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginContent = () => {
+const LoginContent = (props) => {
   const classes = new useStyles();
   const [passwordType, setPasswordType] = useState("password");
   const [loading, setLoading] = useState(false);
@@ -57,6 +59,8 @@ const LoginContent = () => {
         .then(({ data }) => {
           console.log(data);
           cookie.set(BEARER_TOKEN, data.token);
+          cookie.set(USER_REF, data.user._id);
+          // props.addMasterData(data);
           setLoading(false);
           handleReset();
           window.location.reload();
@@ -74,13 +78,7 @@ const LoginContent = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        spacing={2}
-      >
+      <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
           <img src={logo} alt="logo" height="130px" />
         </Grid>
@@ -151,4 +149,12 @@ const LoginContent = () => {
   );
 };
 
-export default LoginContent;
+const mapStateToProps = (state) => ({
+  appState: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addMasterData: (payload) => dispatch(addMasterData(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContent);
