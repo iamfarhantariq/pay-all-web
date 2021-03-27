@@ -4,8 +4,12 @@ import { Box, Grid } from "@material-ui/core";
 import Header from "../../components/Common/Header";
 import { PROJECT_NAME } from "../../constants/strings";
 import BillsList from "../../components/Dashboard/BillsList";
+import LeftSideBar from "../../components/Dashboard/LeftSideBar";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   containerBox: {
     marginTop: "4rem",
   },
@@ -16,19 +20,24 @@ const DashboardPage = () => {
   useEffect(() => {
     document.title = PROJECT_NAME;
   }, []);
+
   return (
-    <>
+    <div className={classes.root}>
       <Header />
       <Box width={1} className={classes.containerBox}>
-        <Grid container>
-          <Grid item lg={2} md={2}></Grid>
-          <Grid item lg={8} md={8} sm={12} xs={12}>
+        <Grid container spacing={0}>
+          <Grid item lg={2} md={2}>
+            <Box style={{ position: "sticky", top: "4rem", width: "100%" }}>
+              <LeftSideBar />
+            </Box>
+          </Grid>
+          <Grid item lg md sm={12} xs={12}>
             <BillsList />
           </Grid>
           <Grid item lg={2} md={2}></Grid>
         </Grid>
       </Box>
-    </>
+    </div>
   );
 };
 

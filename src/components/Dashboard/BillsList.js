@@ -6,6 +6,9 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import GetAppIcon from "@material-ui/icons/GetApp";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   title: {
     fontFamily: "Roboto",
     color: NAV_BAR_COLOR,
@@ -37,9 +40,16 @@ const ListItem = () => {
   const classes = new useStyles();
 
   return (
-    <>
+    <div className={classes.root}>
       <Divider />
-      <Box minWidth={"360px"} style={{ padding: "0.5rem", cursor: "pointer" }}>
+      <Box
+        minWidth={"360px"}
+        style={{
+          padding: "0.5rem",
+          cursor: "pointer",
+          backgroundColor: "white",
+        }}
+      >
         <Grid container spacing={1}>
           <Grid item lg={1} md={1} sm={1} xs={2}>
             <Box
@@ -94,7 +104,7 @@ const ListItem = () => {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </div>
   );
 };
 
@@ -102,46 +112,41 @@ const BillsList = () => {
   const classes = new useStyles();
 
   return (
-    <>
+    <div className={classes.root}>
       <Box
         minWidth={"360px"}
-        width={"100%"}
         className={classes.outerBox}
-        style={{ position: "fixed" }}
+        style={{ position: "sticky", top: "4rem", width: "100%" }}
       >
-        <Grid container alignItems="center" spacing={1}>
-          <Grid item lg md sm xs>
-            <Typography variant="h4" className={classes.title}>
-              Paid
-            </Typography>
-          </Grid>
-          <Grid item lg md sm xs>
-            <Box
-              width="100%"
-              justify="flex-end"
-              display="flex"
-              margin="0 1.5rem"
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h4" className={classes.title}>
+            Paid
+          </Typography>
+          <Box>
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<DateRangeIcon />}
             >
-              <Button
-                variant="outlined"
-                size="small"
-                startIcon={<DateRangeIcon />}
-              >
-                Date
-              </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                startIcon={<GetAppIcon />}
-                style={{ marginLeft: "0.5rem" }}
-              >
-                Export
-              </Button>
-            </Box>
-          </Grid>
+              Date
+            </Button>
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<GetAppIcon />}
+              style={{ marginLeft: "0.5rem" }}
+            >
+              Export
+            </Button>
+          </Box>
         </Grid>
       </Box>
-      <Box style={{ marginTop: "4rem" }}>
+      <Box>
         <ListItem />
         <ListItem />
         <ListItem />
@@ -153,7 +158,7 @@ const BillsList = () => {
         <ListItem />
         <ListItem />
       </Box>
-    </>
+    </div>
   );
 };
 
