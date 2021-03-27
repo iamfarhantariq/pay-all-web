@@ -116,7 +116,7 @@ const BillsList = () => {
       <Box
         minWidth={"360px"}
         className={classes.outerBox}
-        style={{ position: "sticky", top: "4rem", width: "100%" }}
+        style={{ position: "sticky", top: "4rem", maxWidth: "96.7%" }}
       >
         <Grid
           container
