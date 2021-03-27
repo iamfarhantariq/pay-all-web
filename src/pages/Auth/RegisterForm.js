@@ -84,7 +84,9 @@ const RegisterForm = () => {
         .catch((error) => {
           console.log({ error });
           if (error && error.response.status === 422) {
-            alert("Email Exists");
+            dispatch(
+              setSnackbar(true, "error", "User with this email already exists!")
+            );
           }
           setLoading(false);
         });
