@@ -57,25 +57,25 @@ const LoginContent = (props) => {
       password: "",
     },
     onSubmit: (values) => {
-      setLoading(true);
-      authenticate(values)
-        .then(({ data }) => {
-          console.log(data);
-          cookie.set(BEARER_TOKEN, data.token);
-          cookie.set(USER_REF, data.user._id);
-          // props.addMasterData(data);
-          setLoading(false);
-          handleReset();
-          dispatch(setSnackbar(true, "success", "Successfull!"));
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log({ error });
-          if (error.response !== undefined && error.response.status === 401) {
-            alert("Invalid Email or Password");
-          }
-          setLoading(false);
-        });
+      // setLoading(true);
+      // authenticate(values)
+      //   .then(({ data }) => {
+      //     console.log(data);
+      cookie.set(BEARER_TOKEN,  'demo-token dskfahaksdfjklasdjlkfkas');
+      cookie.set(USER_REF,  'demo id');
+      // props.addMasterData(data);
+      //   setLoading(false);
+      //   handleReset();
+      dispatch(setSnackbar(true, "success", "Successfull!"));
+      window.location.reload();
+      // })
+      // .catch((error) => {
+      //   console.log({ error });
+      //   if (error.response !== undefined && error.response.status === 401) {
+      //     alert("Invalid Email or Password");
+      //   }
+      //   setLoading(false);
+      // });
     },
     validationSchema: authSchema,
   });
