@@ -11,7 +11,7 @@ const { routerReducer } = createReduxHistoryContext({
 const rootReducer = combineReducers({
   router: routerReducer,
   masterData,
-  snackbar: snackbarReducer,
+  // snackbar: snackbarReducer,
 });
 
 export default rootReducer;

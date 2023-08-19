@@ -16,7 +16,7 @@ import { registerUser } from "../../services/Auth";
 import { BEARER_TOKEN, USER_REF } from "../../constants/cookies";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { setSnackbar } from "../../redux/actions/snackBar";
+// import { setSnackbar } from "../../redux/actions/snackBar";
 
 const useStyles = makeStyles((theme) => ({
   headingBox: {
@@ -70,29 +70,25 @@ const RegisterForm = () => {
       mainIndustry: "",
     },
     onSubmit: (values) => {
-      setLoading(true);
-      registerUser(values)
-        .then(({ data }) => {
-          console.log(data);
-          Cookies.set(BEARER_TOKEN, data.token);
-          Cookies.set(USER_REF, data.user._id);
-          dispatch(setSnackbar(true, "success", "Successfully Registered!"));
-          setLoading(false);
-          handleReset();
-          window.location.replace("/");
-        })
-        .catch((error) => {
-          console.log({ error });
-          if (error && error.response.status === 422) {
-            dispatch(
-              setSnackbar(true, "error", "User with this email already exists!")
-            );
-          }
-          setLoading(false);
-        });
+      // setLoading(true);
+      // registerUser(values)
+      //   .then(({ data }) => {
+      //     console.log(data);
+          Cookies.set(BEARER_TOKEN, 'ksjdfjadshjkfkadsjfhasdf');
+          Cookies.set(USER_REF, 'test');
+      //     setLoading(false);
+      //     handleReset();
+      window.location.replace("/");
+      // })
+      // .catch((error) => {
+      //   console.log({ error });
+      //   if (error && error.response.status === 422) {
+      //   }
+      //   setLoading(false);
+      // });
     },
-    validationSchema:
-      path() === "organization" ? organizationSchema : personalSchema,
+    // validationSchema: {}
+      // path() === "organization" ? organizationSchema : personalSchema,
   });
 
   const prop = {

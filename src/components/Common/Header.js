@@ -211,7 +211,7 @@ const Header = () => {
               <Typography
                 color="inherit"
                 className={classes.buttonFontSize}
-                onClick={() => window.location.assign("/")}
+                onClick={() => window.location.assign("/login")}
               >
                 Login instead
               </Typography>

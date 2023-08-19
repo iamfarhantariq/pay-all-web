@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import { setSnackbar } from "../../redux/actions/snackBar";
+// import { setSnackbar } from "../../redux/actions/snackBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +25,7 @@ const CustomizedSnackbars = () => {
     if (reason === "clickaway") {
       return;
     }
-    dispatch(setSnackbar(false, snackbarType, snackbarMessage));
+    // dispatch(setSnackbar(false, snackbarType, snackbarMessage));
   };
 
   return (

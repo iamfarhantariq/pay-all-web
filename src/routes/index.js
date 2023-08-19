@@ -15,6 +15,11 @@ export const authRoutes = [
     exact: true,
   },
   {
+    path: "/pay-all-web",
+    component: RegisterPage,
+    exact: true,
+  },
+  {
     path: "/register-user/organization",
     component: RegisterForm,
     exact: true,
@@ -32,38 +37,10 @@ export const protectedRoutes = [
     component: DashboardPage,
     exact: true,
   },
+  {
+    path: "/pay-all-web",
+    component: DashboardPage,
+    exact: true,
+  }
 ];
 
-// export const appRoutes = [
-//   {
-//     path: "/",
-//     component: LoginPage,
-//     exact: true,
-//   },
-//   {
-//     path: "/register-user",
-//     component: RegisterPage,
-//     exact: true,
-//   },
-//   {
-//     path: "/register-user/organization",
-//     component: RegisterForm,
-//     exact: true,
-//   },
-//   {
-//     path: "/register-user/personal",
-//     component: RegisterForm,
-//     exact: true,
-//   },
-//   {
-//     isPrivate: true,
-//     path: "/",
-//     component: DashboardPage,
-//     exact: true,
-//   },
-//   {
-//     path: "*",
-//     component: Page404,
-//     exact: true,
-//   },
-// ];

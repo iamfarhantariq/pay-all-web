@@ -16,7 +16,7 @@ import { PostButton } from "../Common/PostButton";
 import { authenticate } from "../../services/Auth";
 import { authSchema } from "../../validation";
 import { useDispatch } from "react-redux";
-import { setSnackbar } from "../../redux/actions/snackBar";
+// import { setSnackbar } from "../../redux/actions/snackBar";
 
 const useStyles = makeStyles((theme) => ({
   bottomText: {
@@ -66,7 +66,6 @@ const LoginContent = (props) => {
       // props.addMasterData(data);
       //   setLoading(false);
       //   handleReset();
-      dispatch(setSnackbar(true, "success", "Successfull!"));
       window.location.reload();
       // })
       // .catch((error) => {
